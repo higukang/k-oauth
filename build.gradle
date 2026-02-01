@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'kr.higu'
-version = '1.0.5'
+version = '1.0.6'
 
 java {
     withSourcesJar()
@@ -39,8 +39,14 @@ publishing {
     publications {
         mavenJava(MavenPublication) {
             artifact shadowJar
-            artifact sourcesJar
-            artifact javadocJar
+
+            artifact(sourcesJar) {
+                classifier = 'sources'
+            }
+
+            artifact(javadocJar) {
+                classifier = 'javadoc'
+            }
 
             groupId = group
             artifactId = 'k-oauth'
