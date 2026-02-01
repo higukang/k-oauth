@@ -29,7 +29,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.github.higukang:k-oauth:v1.0.0'
+    implementation 'com.github.higukang:k-oauth:1.0.0'
 }
 ```
 
@@ -135,11 +135,11 @@ KakaoUserResponse user = kakaoClient.getUserInfo()
 ## Error Handling
 **K-OAuth provides a detailed exception hierarchy to help you handle various failure scenarios.**
 
-- OAuthValidationException: Thrown when mandatory parameters are missing before the request.
+- **OAuthValidationException**: Thrown when mandatory parameters are missing before the request.
 
-- OAuthResponseException: Thrown when the OAuth provider returns a non-2xx response or a logical error (Naver's 200 OK error).
+- **OAuthResponseException**: Thrown when the OAuth provider returns a non-2xx response or a logical error (Naver's 200 OK error).
 
-- OAuthNetworkException: Thrown when network issues occur (timeouts, DNS failures).
+- **OAuthNetworkException**: Thrown when network issues occur (timeouts, DNS failures).
 
 ```java
 try {

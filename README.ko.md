@@ -29,7 +29,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.github.higukang:k-oauth:v1.0.0'
+    implementation 'com.github.higukang:k-oauth:1.0.0'
 }
 ```
 
@@ -137,11 +137,11 @@ KakaoUserResponse user = kakaoClient.getUserInfo()
 ## 에러 핸들링
 **K-OAuth는 다양한 실패 상황을 세밀하게 처리할 수 있도록 상세한 예외 계층 구조를 제공합니다.**
 
-- OAuthValidationException: 요청 전 필수 파라미터가 누락되었을 때 발생합니다.
+- **OAuthValidationException**: 요청 전 필수 파라미터가 누락되었을 때 발생합니다.
 
-- OAuthResponseException: 제공자 서버가 에러를 반환하거나 논리적 에러(예: 네이버의 200 OK 에러 응답)가 발생했을 때 발생합니다.
+- **OAuthResponseException**: 제공자 서버가 에러를 반환하거나 논리적 에러(예: 네이버의 200 OK 에러 응답)가 발생했을 때 발생합니다.
 
-- OAuthNetworkException: 타임아웃, DNS 오류 등 네트워크 문제가 발생했을 때 발생합니다.
+- **OAuthNetworkException**: 타임아웃, DNS 오류 등 네트워크 문제가 발생했을 때 발생합니다.
 ```java
 try {
     // 요청 실행...
