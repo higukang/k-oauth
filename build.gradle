@@ -5,15 +5,19 @@ plugins {
 }
 
 group = 'kr.higu'
-version = '1.0.3'
+version = '1.0.4'
 
 java {
     withSourcesJar()
     withJavadocJar()
 }
 
+jar {
+    archiveClassifier = 'plain'
+}
+
 shadowJar {
-    archiveClassifier.set('')
+    archiveClassifier = ''
     relocate 'com.google.gson', 'kr.higu.shadow.gson'
 }
 
@@ -34,16 +38,21 @@ dependencies {
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            project.shadow.component(it)
-
+            artifact shadowJar
             artifact sourcesJar
             artifact javadocJar
+
+            groupId = group
+            artifactId = 'k-oauth'
+            version = version
         }
     }
 }
 
 tasks.withType(Javadoc) {
     options.encoding = 'UTF-8'
+    options.addStringOption('Xdoclint:none', '-quiet')
+    failOnError = false
 }
 
 test {
