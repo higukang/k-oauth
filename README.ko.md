@@ -24,13 +24,22 @@
 ```gradle
 repositories {
     mavenCentral()
-    maven { url '[https://jitpack.io](https://jitpack.io)' }
+    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
-    implementation 'com.github.higukang:k-oauth:1.0.0'
+    implementation 'com.github.higukang:k-oauth:v1.0.0'
 }
 ```
+
+### IDE 연동 가이드 (선택 사항)
+라이브러리를 프로젝트에 불러온 후, 인텔리제이 등 IDE에서 소스 코드나 주석(Javadoc)이 보이지 않는다면 아래 방법을 시도해 보세요.
+
+- **IntelliJ**: 라이브러리 클래스 파일을 열었을 때 상단에 나타나는 "Download Sources" 알림줄을 클릭합니다.
+또는, 오른쪽 Gradle 탭에서 "Reload All Gradle Projects" (코끼리 아이콘)를 클릭하여 다시 동기화합니다.
+
+
+- **VS Code**: "Language Support for Java" 확장 프로그램이 설치되어 있다면 자동으로 소스 코드를 연결합니다.
 
 ## 기본 사용법
 

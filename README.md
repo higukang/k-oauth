@@ -24,13 +24,18 @@ Add the following to your `build.gradle` file:
 ```gradle
 repositories {
     mavenCentral()
-    maven { url '[https://jitpack.io](https://jitpack.io)' }
+    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
-    implementation 'com.github.higukang:k-oauth:1.0.0'
+    implementation 'com.github.higukang:k-oauth:v1.0.0'
 }
 ```
+
+### IDE Integration (Optional)
+If you cannot see the library's source code or Javadoc in your IDE:
+- **IntelliJ**: Click **"Download Sources"** in the notification bar or use the Gradle tab to refresh with sources enabled.
+- **VS Code**: Ensure the "Java Language Support" extension is installed; it typically handles sources automatically.
 
 ## General Usage
 
