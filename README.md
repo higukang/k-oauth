@@ -16,6 +16,7 @@ A simple Java OAuth 2.0 library for Korean OAuth providers (Kakao, Naver)
 4. **[Advanced Features](#advanced-features)**
 5. **[Error Handling](#error-handling)**
 6. **[Inspiration](#inspiration)**
+7. **[Contributing](#contributing)**
 
 ## Installation
 
@@ -107,7 +108,7 @@ try {
 NaverClient naverClient = NaverClient.create();
 
 try {
-    NaverUserResponse response = new NaverUserRequest.Builder(httpManager)
+    NaverUserResponse response = naverClient.getUserInfo()
             .accessToken("ACCESS_TOKEN")
             .build()
             .execute();
@@ -157,6 +158,10 @@ try {
 | Inspiration |
 |-------------|
 | Inspired by [spotify-web-api-java](https://github.com/spotify-web-api-java/spotify-web-api-java).            |
+
+## Contributing
+- Issues and Pull Requests are always welcome.  
+- Feel free to contribute, from small typo fixes to feature suggestions.
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
