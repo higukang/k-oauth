@@ -1,10 +1,11 @@
 # K-OAuth
 A simple Java OAuth 2.0 library for Korean OAuth providers (Kakao, Naver)
 
+[![Release](https://jitpack.io/v/higukang/k-oauth.svg)](https://jitpack.io/#higukang/k-oauth)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Java Version](https://img.shields.io/badge/Java-17%2B-blue)](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
 
-[Korean Version](./README.ko.md)
+[Korean Version (한글 문서)](./README.ko.md)
 
 ## Table of Contents
 1. **[Installation](#installation)**

@@ -1,6 +1,7 @@
 # K-OAuth
 한국의 OAuth 인증(카카오, 네이버)을 위한 간단한 자바 OAuth 2.0 라이브러리입니다.
 
+[![Release](https://jitpack.io/v/higukang/k-oauth.svg)](https://jitpack.io/#higukang/k-oauth)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Java Version](https://img.shields.io/badge/Java-17%2B-blue)](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
 
