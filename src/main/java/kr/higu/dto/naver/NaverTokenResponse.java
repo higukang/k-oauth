@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
  * Response DTO for Naver OAuth token request.
  * Contains tokens and error information if the request fails with a 200 OK status.
  *
- * @see <a href="https://developers.naver.com/docs/login/api/api.md#4-2--접근-토큰-발급-및-갱신-응답">Naver Token API Documentation</a>
+ * @see <a href="https://developers.naver.com/docs/login/api/api.md">Naver Token API Documentation</a>
  * @author higukang
  */
 public record NaverTokenResponse(
