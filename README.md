@@ -9,12 +9,13 @@ A simple Java OAuth 2.0 library for Korean OAuth providers (Kakao, Naver)
 
 ## Table of Contents
 1. **[Installation](#installation)**
-2. **[General Usage](#general-usage)**
+2. **[Documentation](#documentation)**
+3. **[General Usage](#general-usage)**
    - **[Kakao Client](#kakao-client)**
    - **[Naver Client](#naver-client)**
-3. **[Advanced Features](#advanced-features)**
-4. **[Error Handling](#error-handling)**
-5. **[Inspiration](#inspiration)**
+4. **[Advanced Features](#advanced-features)**
+5. **[Error Handling](#error-handling)**
+6. **[Inspiration](#inspiration)**
 
 ## Installation
 
@@ -36,6 +37,9 @@ dependencies {
 If you cannot see the library's source code or Javadoc in your IDE:
 - **IntelliJ**: Click **"Download Sources"** in the notification bar or use the Gradle tab to refresh with sources enabled.
 - **VS Code**: Ensure the "Java Language Support" extension is installed; it typically handles sources automatically.
+
+## Documentation
+See this project's **[Javadoc](https://jitpack.io/com/github/higukang/k-oauth/1.0.0/javadoc/)**
 
 ## General Usage
 
