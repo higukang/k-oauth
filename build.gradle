@@ -1,14 +1,20 @@
 plugins {
     id 'java'
     id 'maven-publish'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
 }
 
 group = 'kr.higu'
-version = '1.0.0'
+version = '1.0.1'
 
 java {
     withSourcesJar()
     withJavadocJar()
+}
+
+shadowJar {
+    archiveClassifier.set('')
+    relocate 'com.google.gson', 'kr.higu.shadow.gson'
 }
 
 repositories {
@@ -28,7 +34,10 @@ dependencies {
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            from components.java
+            project.shadow.component(it)
+
+            artifact sourcesJar
+            artifact javadocJar
         }
     }
 }
