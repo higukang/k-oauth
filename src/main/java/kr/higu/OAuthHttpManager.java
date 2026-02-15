@@ -84,7 +84,7 @@ public class OAuthHttpManager implements IHttpManager {
             String body = response.body();
 
             // 2xx Success range
-            if (response.statusCode() >= 200 && response.statusCode() <= 300) {
+            if (response.statusCode() >= 200 && response.statusCode() <= 299) {
                 return body;
             } else {
                 throw new OAuthResponseException(

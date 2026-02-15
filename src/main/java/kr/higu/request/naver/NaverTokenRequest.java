@@ -5,6 +5,7 @@ import com.google.gson.JsonParser;
 import kr.higu.IHttpManager;
 import kr.higu.dto.naver.NaverTokenResponse;
 import kr.higu.exceptions.OAuthException;
+import kr.higu.exceptions.detailed.OAuthParsingException;
 import kr.higu.exceptions.detailed.OAuthResponseException;
 import kr.higu.request.AbstractRequest;
 import kr.higu.request.ErrorDetail;
@@ -134,11 +135,19 @@ public class NaverTokenRequest extends AbstractRequest<NaverTokenResponse> {
      * but the response body contains an 'error' field.
      *
      * @param responseBody The raw response body from Naver.
-     * @throws OAuthException If the body contains an 'error' field.
+     * @throws OAuthException If the body contains an 'error' field or the response cannot be parsed.
      */
     @Override
     protected void validateSuccessResponse(String responseBody) throws OAuthException {
-        JsonObject json = JsonParser.parseString(responseBody).getAsJsonObject();
+        final JsonObject json;
+        try {
+            json = JsonParser.parseString(responseBody).getAsJsonObject();
+        } catch (Exception e) {
+            throw new OAuthParsingException(
+                    "[K-OAuth] Failed to parse NaverTokenResponse response: " + e.getMessage(),
+                    e
+            );
+        }
 
         // Check if 'error' field exists even if HTTP status is 200
         if (json.has("error")) {

@@ -67,7 +67,21 @@ public abstract class AbstractRequest<T> {
             return self();
         }
 
+        /**
+         * Adds a request parameter.
+         * <p>
+         * If {@code value} is {@code null}, the parameter is ignored.
+         * This allows optional parameters to be safely omitted.
+         * </p>
+         *
+         * @param name  parameter name
+         * @param value parameter value, nullable for optional parameters
+         * @return concrete builder instance
+         */
         protected BT addParam(String name, String value) {
+            if (value == null) {
+                return self();
+            }
             params.put(name, value);
             return self();
         }
