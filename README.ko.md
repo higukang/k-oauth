@@ -30,7 +30,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.github.higukang:k-oauth:1.0.0'
+    implementation 'com.github.higukang:k-oauth:1.0.1'
 }
 ```
 
@@ -44,7 +44,7 @@ dependencies {
 - **VS Code**: "Language Support for Java" 확장 프로그램이 설치되어 있다면 자동으로 소스 코드를 연결합니다.
 
 ## 문서
-해당 라이브러리의 **[Javadoc](https://jitpack.io/com/github/higukang/k-oauth/1.0.0/javadoc/)** 을 확인할 수 있습니다
+해당 라이브러리의 **[Javadoc](https://jitpack.io/com/github/higukang/k-oauth/1.0.1/javadoc/)** 을 확인할 수 있습니다
 
 ## 기본 사용법
 
@@ -59,7 +59,7 @@ try {
              .clientId("YOUR_REST_API_KEY")
              .redirectUri("YOUR_REDIRECT_URI")
              .code("AUTHORIZATION_CODE")
-             .clientSecret("YOUR_CLIENT_SECRET") // 선택 사항
+             .clientSecret("YOUR_CLIENT_SECRET") // 선택 사항 (null 입력 시 무시)
              .build()
              .execute();
 
@@ -143,6 +143,12 @@ KakaoUserResponse user = kakaoClient.getUserInfo()
 - **OAuthResponseException**: 제공자 서버가 에러를 반환하거나 논리적 에러(예: 네이버의 200 OK 에러 응답)가 발생했을 때 발생합니다.
 
 - **OAuthNetworkException**: 타임아웃, DNS 오류 등 네트워크 문제가 발생했을 때 발생합니다.
+
+- **OAuthParsingException**: 제공자 응답 JSON 파싱에 실패했을 때 발생합니다.
+
+검증 및 optional 파라미터 동작:
+- 필수 값은 `build()` 시점에 검증되며 누락 시 `OAuthValidationException`이 발생합니다.
+- optional 파라미터에 `null`을 전달하면 안전하게 무시됩니다.
 ```java
 try {
     // 요청 실행...

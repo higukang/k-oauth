@@ -30,7 +30,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.github.higukang:k-oauth:1.0.0'
+    implementation 'com.github.higukang:k-oauth:1.0.1'
 }
 ```
 
@@ -40,7 +40,7 @@ If you cannot see the library's source code or Javadoc in your IDE:
 - **VS Code**: Ensure the "Java Language Support" extension is installed; it typically handles sources automatically.
 
 ## Documentation
-See this project's **[Javadoc](https://jitpack.io/com/github/higukang/k-oauth/1.0.0/javadoc/)**
+See this project's **[Javadoc](https://jitpack.io/com/github/higukang/k-oauth/1.0.1/javadoc/)**
 
 ## General Usage
 
@@ -52,12 +52,12 @@ KakaoClient kakaoClient = KakaoClient.create();
 
 try {
     KakaoTokenResponse response = kakaoClient.getToken()
-            .clientId("YOUR_REST_API_KEY")
-            .redirectUri("YOUR_REDIRECT_URI")
-            .code("AUTHORIZATION_CODE")
-            .clientSecret("YOUR_CLIENT_SECRET") // Optional
-            .build()
-            .execute();
+        .clientId("YOUR_REST_API_KEY")
+        .redirectUri("YOUR_REDIRECT_URI")
+        .code("AUTHORIZATION_CODE")
+        .clientSecret("YOUR_CLIENT_SECRET") // Optional (null is ignored)
+        .build()
+        .execute();
 
     System.out.println("Access Token: " + response.accessToken());
 } catch (OAuthException e) {
@@ -141,6 +141,12 @@ KakaoUserResponse user = kakaoClient.getUserInfo()
 - **OAuthResponseException**: Thrown when the OAuth provider returns a non-2xx response or a logical error (Naver's 200 OK error).
 
 - **OAuthNetworkException**: Thrown when network issues occur (timeouts, DNS failures).
+
+- **OAuthParsingException**: Thrown when a provider response cannot be parsed as expected JSON.
+
+Validation and optional parameter notes:
+- Required values are validated at `build()` time and throw `OAuthValidationException`.
+- Optional parameters with `null` values are safely ignored.
 
 ```java
 try {
