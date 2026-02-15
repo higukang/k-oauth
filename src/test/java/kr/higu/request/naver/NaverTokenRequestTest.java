@@ -3,6 +3,7 @@ package kr.higu.request.naver;
 import kr.higu.IHttpManager;
 import kr.higu.dto.naver.NaverTokenResponse;
 import kr.higu.exceptions.OAuthValidationException;
+import kr.higu.exceptions.detailed.OAuthParsingException;
 import kr.higu.exceptions.detailed.OAuthResponseException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -98,5 +99,24 @@ class NaverTokenRequestTest {
         assertThatThrownBy(builder::build)
                 .isInstanceOf(OAuthValidationException.class)
                 .hasMessageContaining("state");
+    }
+
+    @Test
+    @DisplayName("200 OK인데 malformed JSON이면 OAuthParsingException")
+    void execute_Error_With_200_Ok_MalformedJson() throws Exception {
+        // given
+        given(httpManager.post(any(URI.class), any(), any())).willReturn("not-json");
+
+        NaverTokenRequest request = new NaverTokenRequest.Builder(httpManager)
+                .clientId("ID")
+                .clientSecret("SECRET")
+                .code("CODE")
+                .state("STATE")
+                .build();
+
+        // when, then
+        assertThatThrownBy(request::execute)
+                .isInstanceOf(OAuthParsingException.class)
+                .hasMessageContaining("Failed to parse NaverTokenResponse response");
     }
 }

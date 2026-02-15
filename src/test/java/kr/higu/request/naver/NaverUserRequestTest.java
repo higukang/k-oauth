@@ -2,7 +2,7 @@ package kr.higu.request.naver;
 
 import kr.higu.IHttpManager;
 import kr.higu.dto.naver.NaverUserResponse;
-import kr.higu.exceptions.OAuthException;
+import kr.higu.exceptions.OAuthValidationException;
 import kr.higu.exceptions.detailed.OAuthResponseException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -100,7 +100,7 @@ class NaverUserRequestTest {
 
         // when, then
         assertThatThrownBy(builder::build)
-                .isInstanceOf(OAuthException.class)
+                .isInstanceOf(OAuthValidationException.class)
                 .hasMessageContaining("A valid access token is required");
     }
 }

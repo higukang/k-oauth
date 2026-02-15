@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.ArgumentCaptor;
 
 import java.net.URI;
 
@@ -102,5 +103,35 @@ class KakaoTokenRequestTest {
         assertThatThrownBy(builder::build)
                 .isInstanceOf(OAuthValidationException.class)
                 .hasMessageContaining("client_id");
+    }
+
+    @Test
+    @DisplayName("카카오 토큰 요청 - optional client_secret이 null이면 파라미터에서 제외")
+    void execute_NullOptionalClientSecret_Ignored() throws Exception {
+        // given
+        given(httpManager.post(any(URI.class), any(), any())).willReturn("""
+                {
+                    "access_token": "ACCESS",
+                    "token_type": "bearer",
+                    "expires_in": 21599
+                }
+                """);
+        ArgumentCaptor<String> bodyCaptor = ArgumentCaptor.forClass(String.class);
+
+        KakaoTokenRequest request = new KakaoTokenRequest.Builder(httpManager)
+                .clientId("TEST_ID")
+                .redirectUri("http://localhost")
+                .code("TEST_CODE")
+                .clientSecret(null)
+                .build();
+
+        // when
+        KakaoTokenResponse response = request.execute();
+
+        // then
+        assertThat(response.accessToken()).isEqualTo("ACCESS");
+        org.mockito.Mockito.verify(httpManager)
+                .post(any(URI.class), any(), bodyCaptor.capture());
+        assertThat(bodyCaptor.getValue()).doesNotContain("client_secret");
     }
 }
