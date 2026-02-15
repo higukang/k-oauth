@@ -71,6 +71,7 @@ public class KakaoTokenRequest extends AbstractRequest<KakaoTokenResponse> {
         /**
          * Sets the Client Secret if you have enabled the "Client Secret" feature in the Kakao Console.
          * This is optional unless the feature is enabled.
+         * A {@code null} value is ignored.
          *
          * @param clientSecret The Client Secret string.
          * @return This builder instance.

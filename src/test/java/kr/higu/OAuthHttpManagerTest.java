@@ -2,11 +2,14 @@ package kr.higu;
 
 import kr.higu.exceptions.detailed.OAuthNetworkException;
 import kr.higu.exceptions.detailed.OAuthResponseException;
+import com.sun.net.httpserver.HttpServer;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+import java.io.OutputStream;
+import java.net.InetSocketAddress;
 import java.net.URI;
 import java.util.Map;
 
@@ -86,5 +89,35 @@ class OAuthHttpManagerTest {
         // when, then
         assertThatThrownBy(() -> httpManager.get(uri, null))
                 .isInstanceOf(OAuthNetworkException.class);
+    }
+
+    @Test
+    @DisplayName("HTTP 300은 성공이 아니라 OAuthResponseException")
+    void get_LocalServer_300IsError() throws Exception {
+        // given
+        HttpServer server = HttpServer.create(new InetSocketAddress(0), 0);
+        try {
+            server.createContext("/redirect", exchange -> {
+                byte[] body = "{\"message\":\"redirect\"}".getBytes();
+                exchange.sendResponseHeaders(300, body.length);
+                try (OutputStream os = exchange.getResponseBody()) {
+                    os.write(body);
+                }
+            });
+            server.start();
+
+            int port = server.getAddress().getPort();
+            URI uri = URI.create("http://127.0.0.1:" + port + "/redirect");
+
+            // when, then
+            assertThatThrownBy(() -> httpManager.get(uri, null))
+                    .isInstanceOf(OAuthResponseException.class)
+                    .satisfies(e -> {
+                        OAuthResponseException ex = (OAuthResponseException) e;
+                        assertThat(ex.getStatusCode()).isEqualTo(300);
+                    });
+        } finally {
+            server.stop(0);
+        }
     }
 }

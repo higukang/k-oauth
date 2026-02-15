@@ -5,6 +5,7 @@ import com.google.gson.JsonParser;
 import kr.higu.IHttpManager;
 import kr.higu.dto.naver.NaverUserResponse;
 import kr.higu.exceptions.OAuthException;
+import kr.higu.exceptions.OAuthValidationException;
 import kr.higu.request.AbstractRequest;
 import kr.higu.request.ErrorDetail;
 
@@ -55,13 +56,13 @@ public class NaverUserRequest extends AbstractRequest<NaverUserResponse> {
          * Validates the presence of the Bearer access token and builds the request.
          *
          * @return A new {@link NaverUserRequest} instance.
-         * @throws OAuthException If the Authorization header is missing or does not start with "Bearer ".
+         * @throws OAuthValidationException If the Authorization header is missing or does not start with "Bearer ".
          */
         @Override
         public NaverUserRequest build() throws OAuthException {
             String authHeader = this.headers.get("Authorization");
             if (authHeader == null || authHeader.isBlank() || !authHeader.startsWith("Bearer ")) {
-                throw new OAuthException("[kr-oauth] A valid access token is required to retrieve Naver user information.");
+                throw new OAuthValidationException("[kr-oauth] A valid access token is required to retrieve Naver user information.");
             }
             return new NaverUserRequest(this);
         }
