@@ -1,7 +1,8 @@
 # K-OAuth
 한국의 OAuth 인증(카카오, 네이버)을 위한 간단한 자바 OAuth 2.0 라이브러리입니다.
 
-[![Release](https://jitpack.io/v/higukang/k-oauth.svg)](https://jitpack.io/#higukang/k-oauth)
+[![Maven Central](https://img.shields.io/maven-central/v/kr.higu/k-oauth)](https://central.sonatype.com/artifact/kr.higu/k-oauth)
+[![JitPack](https://img.shields.io/jitpack/v/github/higukang/k-oauth)](https://jitpack.io/#higukang/k-oauth)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Java Version](https://img.shields.io/badge/Java-17%2B-blue)](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
 
@@ -20,9 +21,31 @@
 
 ## 설치 방법
 
-### Gradle
+### Maven Central
+공식 릴리즈는 Maven Central에 배포됩니다.
+
+#### Gradle
 `build.gradle` 파일에 아래 설정을 추가하세요:
 
+```gradle
+dependencies {
+    implementation 'kr.higu:k-oauth:0.1.0'
+}
+```
+
+#### Maven
+```xml
+<dependency>
+  <groupId>kr.higu</groupId>
+  <artifactId>k-oauth</artifactId>
+  <version>0.1.0</version>
+</dependency>
+```
+
+### JitPack
+JitPack은 GitHub 기반 스냅샷 또는 브랜치 빌드를 위한 보조 배포 채널로 유지합니다.
+
+#### Gradle
 ```gradle
 repositories {
     mavenCentral()
@@ -30,7 +53,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.github.higukang:k-oauth:1.0.1'
+    implementation 'com.github.higukang:k-oauth:master-SNAPSHOT'
 }
 ```
 
@@ -44,7 +67,7 @@ dependencies {
 - **VS Code**: "Language Support for Java" 확장 프로그램이 설치되어 있다면 자동으로 소스 코드를 연결합니다.
 
 ## 문서
-해당 라이브러리의 **[Javadoc](https://jitpack.io/com/github/higukang/k-oauth/1.0.1/javadoc/)** 을 확인할 수 있습니다
+Javadoc은 Maven Central에 배포되는 `javadoc` classifier 아티팩트에 포함됩니다.
 
 ## 기본 사용법
 
