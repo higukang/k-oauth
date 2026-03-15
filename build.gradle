@@ -1,24 +1,22 @@
+import org.gradle.plugins.signing.Sign
+
 plugins {
     id 'java'
     id 'maven-publish'
-    id 'com.github.johnrengelman.shadow' version '8.1.1'
+    id 'signing'
 }
 
 group = 'kr.higu'
-version = '1.0.1'
+version = '0.1.0'
+
+def signingKey = findProperty('signingKey') ?: System.getenv('ORG_GRADLE_PROJECT_signingKey')
+def signingPassword = findProperty('signingPassword') ?: System.getenv('ORG_GRADLE_PROJECT_signingPassword')
+def mavenCentralUsername = findProperty('mavenCentralUsername') ?: System.getenv('ORG_GRADLE_PROJECT_mavenCentralUsername')
+def mavenCentralPassword = findProperty('mavenCentralPassword') ?: System.getenv('ORG_GRADLE_PROJECT_mavenCentralPassword')
 
 java {
     withSourcesJar()
     withJavadocJar()
-}
-
-jar {
-    archiveClassifier = 'plain'
-}
-
-shadowJar {
-    archiveClassifier = ''
-    relocate 'com.google.gson', 'kr.higu.shadow.gson'
 }
 
 repositories {
@@ -38,21 +36,62 @@ dependencies {
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            artifact shadowJar
-
-            artifact(sourcesJar) {
-                classifier = 'sources'
-            }
-
-            artifact(javadocJar) {
-                classifier = 'javadoc'
-            }
+            from components.java
 
             groupId = group
             artifactId = 'k-oauth'
             version = version
+
+            pom {
+                name = 'K-OAuth'
+                description = 'A Java OAuth 2.0 library for Korean OAuth providers.'
+                url = 'https://github.com/higukang/k-oauth'
+
+                licenses {
+                    license {
+                        name = 'MIT License'
+                        url = 'https://opensource.org/licenses/MIT'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id = 'higukang'
+                        name = 'higu'
+                    }
+                }
+
+                scm {
+                    connection = 'scm:git:https://github.com/higukang/k-oauth.git'
+                    developerConnection = 'scm:git:ssh://git@github.com/higukang/k-oauth.git'
+                    url = 'https://github.com/higukang/k-oauth'
+                }
+            }
         }
     }
+
+    repositories {
+        maven {
+            name = 'sonatypeCentral'
+            url = uri('https://ossrh-staging-api.central.sonatype.com/service/local/staging/deploy/maven2/')
+
+            credentials {
+                username = mavenCentralUsername
+                password = mavenCentralPassword
+            }
+        }
+    }
+}
+
+signing {
+    if (signingKey && signingPassword) {
+        useInMemoryPgpKeys(signingKey, signingPassword)
+        sign publishing.publications.mavenJava
+    }
+}
+
+tasks.withType(Sign).configureEach {
+    onlyIf { signingKey && signingPassword }
 }
 
 tasks.withType(Javadoc) {
