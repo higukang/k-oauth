@@ -86,7 +86,32 @@ try {
     e.printStackTrace();
 }
 ```
-**2. Get User Profile**
+
+**2. Refresh Tokens with a Refresh Token**
+```java
+KakaoClient kakaoClient = KakaoClient.create();
+
+try {
+    KakaoRefreshTokenResponse response = kakaoClient.refreshToken()
+            .clientId("YOUR_REST_API_KEY")
+            .refreshToken("USER_REFRESH_TOKEN")
+            .clientSecret("YOUR_CLIENT_SECRET") // Optional unless Client Secret is enabled
+            .build()
+            .execute();
+
+    System.out.println("Refreshed Access Token: " + response.accessToken());
+} catch (OAuthException e) {
+    e.printStackTrace();
+}
+```
+
+Kakao refresh token notes:
+- If Client Secret is enabled in the Kakao console, `client_secret` must be included in the refresh request.
+- `id_token` is only returned when the refresh token was originally issued with OpenID Connect.
+- `refresh_token` and `refresh_token_expires_in` are only returned when the current refresh token has less than one month remaining.
+- If Kakao returns an error such as `KOE237`, the library exposes it through `OAuthResponseException#getErrorCode()`.
+
+**3. Get User Profile**
 ```java
 KakaoClient kakaoClient = KakaoClient.create();
 
