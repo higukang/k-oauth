@@ -193,3 +193,5 @@ try {
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
+
+<img referrerpolicy="no-referrer-when-downgrade" src="https://static.scarf.sh/a.png?x-pxid=ca8a4308-8bd3-43c2-b192-2a78d2b18c5c" />
