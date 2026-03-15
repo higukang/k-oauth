@@ -175,7 +175,7 @@ try {
 ```java
 KakaoUserResponse user = kakaoClient.getUserInfo()
         .accessToken("ACCESS_TOKEN")
-        .propertyKeys(KakaoPropertyKey.EMAIL, KakaoPropertyKey.PHONE_NUMBER)
+        .propertyKeys(KakaoPropertyKey.EMAIL, KakaoPropertyKey.PROFILE)
         .secureResource(true) // 이미지 URL을 HTTPS로 반환
         .build()
         .execute();

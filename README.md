@@ -174,7 +174,7 @@ You can request specific user properties to optimize the response size.
 ```java
 KakaoUserResponse user = kakaoClient.getUserInfo()
         .accessToken("ACCESS_TOKEN")
-        .propertyKeys(KakaoPropertyKey.EMAIL, KakaoPropertyKey.NICKNAME)
+        .propertyKeys(KakaoPropertyKey.EMAIL, KakaoPropertyKey.PROFILE)
         .secureResource(true) // Return HTTPS URLs
         .build()
         .execute();
