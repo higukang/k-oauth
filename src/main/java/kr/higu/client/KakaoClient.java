@@ -2,6 +2,7 @@ package kr.higu.client;
 
 import kr.higu.IHttpManager;
 import kr.higu.OAuthHttpManager;
+import kr.higu.request.kakao.KakaoRefreshTokenRequest;
 import kr.higu.request.kakao.KakaoTokenRequest;
 import kr.higu.request.kakao.KakaoUserRequest;
 
@@ -9,7 +10,7 @@ import kr.higu.request.kakao.KakaoUserRequest;
  * The main entry point for interacting with Kakao OAuth services.
  * <p>
  * This client provides access to various Kakao-specific request builders,
- * such as token exchange and user information retrieval.
+ * such as authorization code token issuance, token refresh, and user information retrieval.
  * It uses a fluent API style through builders to make OAuth integration simple and readable.
  * </p>
  *
@@ -20,6 +21,13 @@ import kr.higu.request.kakao.KakaoUserRequest;
  * .redirectUri("REDIRECT_URI")
  * .code("AUTHORIZATION_CODE")
  * .clientSecret("CLIENT_SECRET") //optional
+ * .build()
+ * .execute();
+ *
+ * KakaoRefreshTokenResponse refreshed = client.refreshToken()
+ * .clientId("REST_API_KEY")
+ * .refreshToken("USER_REFRESH_TOKEN")
+ * .clientSecret("CLIENT_SECRET") // optional unless enabled
  * .build()
  * .execute();
  * }</pre>
@@ -67,6 +75,16 @@ public class KakaoClient {
      */
     public KakaoTokenRequest.Builder getToken() {
         return new KakaoTokenRequest.Builder(httpManager);
+    }
+
+    /**
+     * Provides a builder for creating a {@link KakaoRefreshTokenRequest}.
+     * This is used to refresh an access token with a Kakao refresh token.
+     *
+     * @return A builder for KakaoRefreshTokenRequest.
+     */
+    public KakaoRefreshTokenRequest.Builder refreshToken() {
+        return new KakaoRefreshTokenRequest.Builder(httpManager);
     }
 
     /**

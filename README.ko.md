@@ -91,7 +91,31 @@ try {
 }
 ```
 
-**2. 사용자 정보 가져오기**
+**2. 리프레시 토큰으로 토큰 갱신**
+```java
+KakaoClient kakaoClient = KakaoClient.create();
+
+try {
+     KakaoRefreshTokenResponse response = kakaoClient.refreshToken()
+             .clientId("YOUR_REST_API_KEY")
+             .refreshToken("USER_REFRESH_TOKEN")
+             .clientSecret("YOUR_CLIENT_SECRET") // 클라이언트 시크릿 활성화 시 필수
+             .build()
+             .execute();
+
+    System.out.println("갱신된 액세스 토큰: " + response.accessToken());
+} catch (OAuthException e) {
+    e.printStackTrace();
+}
+```
+
+카카오 토큰 갱신 주의사항:
+- 카카오 콘솔에서 클라이언트 시크릿 기능이 활성화되어 있으면 `client_secret`를 반드시 포함해야 합니다.
+- `id_token`은 OpenID Connect 기반으로 발급된 리프레시 토큰으로 갱신 요청한 경우에만 응답에 포함됩니다.
+- `refresh_token`, `refresh_token_expires_in`은 현재 리프레시 토큰의 만료가 1개월 미만인 경우에만 응답에 포함됩니다.
+- 카카오가 `KOE237` 같은 에러를 반환하면 라이브러리는 `OAuthResponseException#getErrorCode()`로 그대로 노출합니다.
+
+**3. 사용자 정보 가져오기**
 ```java
 KakaoClient kakaoClient = KakaoClient.create();
 
@@ -151,7 +175,7 @@ try {
 ```java
 KakaoUserResponse user = kakaoClient.getUserInfo()
         .accessToken("ACCESS_TOKEN")
-        .propertyKeys(KakaoPropertyKey.EMAIL, KakaoPropertyKey.PHONE_NUMBER)
+        .propertyKeys(KakaoPropertyKey.EMAIL, KakaoPropertyKey.PROFILE)
         .secureResource(true) // 이미지 URL을 HTTPS로 반환
         .build()
         .execute();
