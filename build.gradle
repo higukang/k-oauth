@@ -15,9 +15,15 @@ def mavenCentralUsername = findProperty('mavenCentralUsername') ?: System.getenv
 def mavenCentralPassword = findProperty('mavenCentralPassword') ?: System.getenv('ORG_GRADLE_PROJECT_mavenCentralPassword')
 
 java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
     withSourcesJar()
     withJavadocJar()
 }
+
+sourceCompatibility = JavaVersion.VERSION_17
+targetCompatibility = JavaVersion.VERSION_17
 
 repositories {
     mavenCentral()
@@ -98,6 +104,10 @@ tasks.withType(Javadoc) {
     options.encoding = 'UTF-8'
     options.addStringOption('Xdoclint:none', '-quiet')
     failOnError = false
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.release = 17
 }
 
 test {
