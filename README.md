@@ -29,7 +29,7 @@ Add the following to your `build.gradle` file:
 
 ```gradle
 dependencies {
-    implementation 'kr.higu:k-oauth:0.1.0'
+    implementation 'kr.higu:k-oauth:0.1.1'
 }
 ```
 
@@ -38,7 +38,7 @@ dependencies {
 <dependency>
   <groupId>kr.higu</groupId>
   <artifactId>k-oauth</artifactId>
-  <version>0.1.0</version>
+  <version>0.1.1</version>
 </dependency>
 ```
 
