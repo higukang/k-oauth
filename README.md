@@ -1,7 +1,8 @@
 # K-OAuth
 A simple Java OAuth 2.0 library for Korean OAuth providers (Kakao, Naver)
 
-[![Release](https://jitpack.io/v/higukang/k-oauth.svg)](https://jitpack.io/#higukang/k-oauth)
+[![Maven Central](https://img.shields.io/maven-central/v/kr.higu/k-oauth)](https://central.sonatype.com/artifact/kr.higu/k-oauth)
+[![JitPack](https://img.shields.io/jitpack/v/github/higukang/k-oauth)](https://jitpack.io/#higukang/k-oauth)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Java Version](https://img.shields.io/badge/Java-17%2B-blue)](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
 
@@ -20,9 +21,31 @@ A simple Java OAuth 2.0 library for Korean OAuth providers (Kakao, Naver)
 
 ## Installation
 
-### Gradle
+### Maven Central
+Official releases are published to Maven Central.
+
+#### Gradle
 Add the following to your `build.gradle` file:
 
+```gradle
+dependencies {
+    implementation 'kr.higu:k-oauth:0.1.0'
+}
+```
+
+#### Maven
+```xml
+<dependency>
+  <groupId>kr.higu</groupId>
+  <artifactId>k-oauth</artifactId>
+  <version>0.1.0</version>
+</dependency>
+```
+
+### JitPack
+JitPack remains available as a secondary channel for GitHub-based snapshot or branch builds.
+
+#### Gradle
 ```gradle
 repositories {
     mavenCentral()
@@ -30,7 +53,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.github.higukang:k-oauth:1.0.1'
+    implementation 'com.github.higukang:k-oauth:master-SNAPSHOT'
 }
 ```
 
@@ -40,7 +63,7 @@ If you cannot see the library's source code or Javadoc in your IDE:
 - **VS Code**: Ensure the "Java Language Support" extension is installed; it typically handles sources automatically.
 
 ## Documentation
-See this project's **[Javadoc](https://jitpack.io/com/github/higukang/k-oauth/1.0.1/javadoc/)**
+Javadoc is included in the published Maven Central artifacts through the `javadoc` classifier.
 
 ## General Usage
 
