@@ -2,7 +2,6 @@
 A simple Java OAuth 2.0 library for Korean OAuth providers (Kakao, Naver)
 
 [![Maven Central](https://img.shields.io/maven-central/v/kr.higu/k-oauth)](https://central.sonatype.com/artifact/kr.higu/k-oauth)
-[![JitPack](https://img.shields.io/jitpack/v/github/higukang/k-oauth)](https://jitpack.io/#higukang/k-oauth)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Java Version](https://img.shields.io/badge/Java-17%2B-blue)](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
 
@@ -53,7 +52,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.github.higukang:k-oauth:master-SNAPSHOT'
+    implementation 'com.github.higukang:k-oauth:main-SNAPSHOT'
 }
 ```
 
