@@ -23,6 +23,13 @@ import kr.higu.request.kakao.KakaoUserRequest;
  * .clientSecret("CLIENT_SECRET") //optional
  * .build()
  * .execute();
+ *
+ * KakaoRefreshTokenResponse refreshed = client.refreshToken()
+ * .clientId("REST_API_KEY")
+ * .refreshToken("USER_REFRESH_TOKEN")
+ * .clientSecret("CLIENT_SECRET") // optional unless enabled
+ * .build()
+ * .execute();
  * }</pre>
  *
  * @author higukang
@@ -72,7 +79,7 @@ public class KakaoClient {
 
     /**
      * Provides a builder for creating a {@link KakaoRefreshTokenRequest}.
-     * This is used to refresh tokens with a Kakao refresh token.
+     * This is used to refresh an access token with a Kakao refresh token.
      *
      * @return A builder for KakaoRefreshTokenRequest.
      */
