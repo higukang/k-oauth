@@ -152,7 +152,31 @@ try {
 }
 ```
 
-**2. 사용자 정보 가져오기**
+**2. 리프레시 토큰으로 액세스 토큰 갱신**
+```java
+NaverClient naverClient = NaverClient.create();
+
+try {
+     NaverRefreshTokenResponse response = naverClient.refreshToken()
+             .clientId("YOUR_CLIENT_ID")
+             .clientSecret("YOUR_CLIENT_SECRET")
+             .refreshToken("USER_REFRESH_TOKEN")
+             .build()
+             .execute();
+
+    System.out.println("갱신된 액세스 토큰: " + response.accessToken());
+} catch (OAuthException e) {
+    e.printStackTrace();
+}
+```
+
+네이버 토큰 갱신 주의사항:
+- 네이버는 토큰 발급과 토큰 갱신에 같은 엔드포인트를 사용하지만 `grant_type`에 따라 필수 파라미터가 달라집니다.
+- 토큰 갱신 응답은 공식 문서의 출력 결과 형식을 따르며 `refresh_token`은 포함하지 않습니다.
+- 네이버는 HTTP `200 OK`를 반환하더라도 응답 본문에 `error`, `error_description`를 담아 실패를 표현할 수 있습니다.
+- 라이브러리는 이러한 응답을 `OAuthResponseException`으로 변환합니다.
+
+**3. 사용자 정보 가져오기**
 ```java
 NaverClient naverClient = NaverClient.create();
 

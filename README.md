@@ -150,7 +150,31 @@ try {
 }
 ```
 
-**2. Get User Profile**
+**2. Refresh Access Token with a Refresh Token**
+```java
+NaverClient naverClient = NaverClient.create();
+
+try {
+    NaverRefreshTokenResponse response = naverClient.refreshToken()
+            .clientId("YOUR_CLIENT_ID")
+            .clientSecret("YOUR_CLIENT_SECRET")
+            .refreshToken("USER_REFRESH_TOKEN")
+            .build()
+            .execute();
+
+    System.out.println("Refreshed Access Token: " + response.accessToken());
+} catch (OAuthException e) {
+    e.printStackTrace();
+}
+```
+
+Naver refresh token notes:
+- Naver uses the same token endpoint for token issuance and token refresh, but the required parameters differ by `grant_type`.
+- The refresh token response follows the official refresh output fields and does not include `refresh_token`.
+- Naver may return HTTP `200 OK` with `error` and `error_description` in the response body.
+- The library converts those responses into `OAuthResponseException`.
+
+**3. Get User Profile**
 ```java
 NaverClient naverClient = NaverClient.create();
 
