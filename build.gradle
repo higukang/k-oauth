@@ -7,7 +7,7 @@ plugins {
 }
 
 group = 'kr.higu'
-version = '0.1.1'
+version = '0.1.2'
 
 def signingKey = findProperty('signingKey') ?: System.getenv('ORG_GRADLE_PROJECT_signingKey')
 def signingPassword = findProperty('signingPassword') ?: System.getenv('ORG_GRADLE_PROJECT_signingPassword')

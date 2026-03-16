@@ -28,7 +28,7 @@
 
 ```gradle
 dependencies {
-    implementation 'kr.higu:k-oauth:0.1.1'
+    implementation 'kr.higu:k-oauth:0.1.2'
 }
 ```
 
@@ -37,7 +37,7 @@ dependencies {
 <dependency>
   <groupId>kr.higu</groupId>
   <artifactId>k-oauth</artifactId>
-  <version>0.1.1</version>
+  <version>0.1.2</version>
 </dependency>
 ```
 
