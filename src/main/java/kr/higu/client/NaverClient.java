@@ -2,6 +2,7 @@ package kr.higu.client;
 
 import kr.higu.IHttpManager;
 import kr.higu.OAuthHttpManager;
+import kr.higu.request.naver.NaverRefreshTokenRequest;
 import kr.higu.request.naver.NaverTokenRequest;
 import kr.higu.request.naver.NaverUserRequest;
 
@@ -9,8 +10,8 @@ import kr.higu.request.naver.NaverUserRequest;
  * The main entry point for interacting with Naver OAuth services.
  * <p>
  * This client provides access to Naver-specific request builders,
- * allowing developers to easily exchange authorization codes for tokens
- * and retrieve user profile information.
+ * allowing developers to easily exchange authorization codes for tokens,
+ * refresh tokens, and retrieve user profile information.
  * </p>
  *
  * <pre>{@code
@@ -20,6 +21,13 @@ import kr.higu.request.naver.NaverUserRequest;
  * .clientSecret("YOUR_CLIENT_SECRET")
  * .code("AUTHORIZATION_CODE")
  * .state("YOUR_STATE")
+ * .build()
+ * .execute();
+ *
+ * NaverRefreshTokenResponse refreshed = client.refreshToken()
+ * .clientId("YOUR_CLIENT_ID")
+ * .clientSecret("YOUR_CLIENT_SECRET")
+ * .refreshToken("USER_REFRESH_TOKEN")
  * .build()
  * .execute();
  * }</pre>
@@ -67,6 +75,16 @@ public class NaverClient {
      */
     public NaverTokenRequest.Builder getToken() {
         return new NaverTokenRequest.Builder(httpManager);
+    }
+
+    /**
+     * Provides a builder for creating a {@link NaverRefreshTokenRequest}.
+     * Use this to refresh an access token with Naver's auth server.
+     *
+     * @return A builder for NaverRefreshTokenRequest.
+     */
+    public NaverRefreshTokenRequest.Builder refreshToken() {
+        return new NaverRefreshTokenRequest.Builder(httpManager);
     }
 
     /**
