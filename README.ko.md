@@ -68,6 +68,16 @@ dependencies {
 ## 문서
 Javadoc은 Maven Central에 배포되는 `javadoc` classifier 아티팩트에 포함됩니다.
 
+### 왜 singleton HttpClient를 사용하나요?
+K-OAuth는 OAuth 요청마다 새로운 HTTP 클라이언트를 생성하지 않기 위해 기본적으로 singleton `HttpClient`를 사용합니다.
+하나의 클라이언트를 재사용하면 불필요한 생성 오버헤드를 줄일 수 있고,
+JDK가 내부적으로 연결을 재사용할 수 있으며,
+일반적인 Spring Boot 환경이나 사이드 프로젝트에서 라이브러리를 가볍고 예측 가능하게 유지할 수 있습니다.
+
+이 설계는 복잡한 설정을 늘리기보다 단순함과 실용성을 우선한 선택입니다.
+전송 계층을 더 세밀하게 제어하고 싶다면 `KakaoClient.create(IHttpManager)` 또는
+`NaverClient.create(IHttpManager)`를 통해 custom `IHttpManager`를 주입할 수 있습니다.
+
 ## 기본 사용법
 
 ### 카카오 클라이언트

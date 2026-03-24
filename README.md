@@ -64,6 +64,15 @@ If you cannot see the library's source code or Javadoc in your IDE:
 ## Documentation
 Javadoc is included in the published Maven Central artifacts through the `javadoc` classifier.
 
+### Why Singleton HttpClient?
+K-OAuth uses a singleton `HttpClient` by default to avoid creating a new HTTP client for every OAuth request.
+Reusing a single client reduces unnecessary overhead, allows the JDK to reuse underlying connections internally,
+and keeps the library lightweight for common Spring Boot and side-project use cases.
+
+This design favors simplicity and predictable behavior over heavy configuration.
+If you need more control over the transport layer, you can provide your own `IHttpManager`
+through `KakaoClient.create(IHttpManager)` or `NaverClient.create(IHttpManager)`.
+
 ## General Usage
 
 ### Kakao Client
